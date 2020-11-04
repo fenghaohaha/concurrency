@@ -1,8 +1,13 @@
 package com.example.concurrency.features.semaphore;
 
+import com.example.concurrency.features.threadPool.ThreadPoolBuilder;
+import com.example.concurrency.util.ThreadUtil;
+
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
 
 /**
@@ -85,10 +90,28 @@ public class SemaphoreEx {
         // 创建对象池
         ObjPool<Object, String> pool = new ObjPool<>(10,"Worker");
         // 通过对象池获取 t，之后执行
-        pool.exec(t -> {
-            System.out.println(t);
-            return t.toString();
-        });
+
+        ThreadPoolExecutor threadPoolExecutor = ThreadPoolBuilder.fixedPool().setPoolSize(20).build();
+
+        for (int i = 0; i < 20; i++) {
+            threadPoolExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        pool.exec(t -> {
+                            System.out.println(t);
+                            ThreadUtil.sleep(3000);
+                            return t.toString();
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+        }
+
+        threadPoolExecutor.shutdown();
     }
 
 

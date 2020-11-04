@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
  * 描述:
  * CompletableFutureExample  Java 8 异步编程可描述串行关系、AND汇聚关系和OR汇聚关系以及异常处理
  *
+ * 思想与webFlux类似
  * @author zed
  * @since 2019-07-03 1:57 PM
  */
