@@ -11,6 +11,8 @@ import java.util.concurrent.*;
  * CompletionService BlockingQueue+Executor
  *
  * 批量执行异步任务 并且可以支持Forking Cluster模式即并行查询多个服务其中一个返回则结束
+ *
+ * CompletionService:将新产生的异步任务与已经执行完成的任务分离开来，避免使用传统的遍历futureTask的方法来获取和阻塞等待任务结果。无法保证任务的执行顺序
  * @author zed
  * @since 2019-07-03 10:07 AM
  */
@@ -39,13 +41,13 @@ public class ExecutorCompletionServiceExample {
                 }
                 // 简单地通过判空来检查是否成功返回
                 if (r != null ) {
-                    break;
+//                    break;
                 }
             }
         } finally {
             // 取消所有任务
             for(Future<Integer> f : futures){
-                f.cancel(true);
+//                f.cancel(true);
 
             }
         }

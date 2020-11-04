@@ -17,9 +17,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  *
  */
 public class ContentSwitchTest {
-    private static final long COUNT = 10000000000L;
+    private static final long COUNT = 10000000000l;
 
-    private static ThreadPoolExecutor threadPoolExecutor = ThreadPoolBuilder.fixedPool().setPoolSize(1).build();
+    private static ThreadPoolExecutor threadPoolExecutor = ThreadPoolBuilder.fixedPool().setPoolSize(2).build();
 
     public static void main(String[] args){
         concurrency();

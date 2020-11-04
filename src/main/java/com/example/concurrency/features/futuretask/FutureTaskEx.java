@@ -98,12 +98,17 @@ public class FutureTaskEx {
             TimeUnit.SECONDS.sleep(1);
 
             System.out.println("T1: 烧开水...");
-            TimeUnit.SECONDS.sleep(15);
+
             // 获取 T2 线程的茶叶
             String tf = ft2.get();
             System.out.println("T1: 拿到茶叶:"+tf);
 
+            System.out.println("T1: 等水烧开...");
+            TimeUnit.SECONDS.sleep(15);
+
             System.out.println("T1: 泡茶...");
+
+            TimeUnit.SECONDS.sleep(10);
             return " 上茶:" + tf;
         }
     }
